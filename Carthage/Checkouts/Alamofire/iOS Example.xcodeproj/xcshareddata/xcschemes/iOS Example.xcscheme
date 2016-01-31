@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0720"
+   LastUpgradeVersion = "0700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B1831AA81C5E5A4E00DC2D23"
-               BuildableName = "Evergreen.framework"
-               BlueprintName = "Evergreen"
-               ReferencedContainer = "container:Evergreen.xcodeproj">
+               BlueprintIdentifier = "F8111E0419A951050040E7D1"
+               BuildableName = "iOS Example.app"
+               BlueprintName = "iOS Example"
+               ReferencedContainer = "container:iOS Example.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,24 +28,14 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B1831AB21C5E5A4E00DC2D23"
-               BuildableName = "EvergreenTests.xctest"
-               BlueprintName = "EvergreenTests"
-               ReferencedContainer = "container:Evergreen.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B1831AA81C5E5A4E00DC2D23"
-            BuildableName = "Evergreen.framework"
-            BlueprintName = "Evergreen"
-            ReferencedContainer = "container:Evergreen.xcodeproj">
+            BlueprintIdentifier = "F8111E0419A951050040E7D1"
+            BuildableName = "iOS Example.app"
+            BlueprintName = "iOS Example"
+            ReferencedContainer = "container:iOS Example.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -61,15 +51,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B1831AA81C5E5A4E00DC2D23"
-            BuildableName = "Evergreen.framework"
-            BlueprintName = "Evergreen"
-            ReferencedContainer = "container:Evergreen.xcodeproj">
+            BlueprintIdentifier = "F8111E0419A951050040E7D1"
+            BuildableName = "iOS Example.app"
+            BlueprintName = "iOS Example"
+            ReferencedContainer = "container:iOS Example.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -79,15 +70,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B1831AA81C5E5A4E00DC2D23"
-            BuildableName = "Evergreen.framework"
-            BlueprintName = "Evergreen"
-            ReferencedContainer = "container:Evergreen.xcodeproj">
+            BlueprintIdentifier = "F8111E0419A951050040E7D1"
+            BuildableName = "iOS Example.app"
+            BlueprintName = "iOS Example"
+            ReferencedContainer = "container:iOS Example.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

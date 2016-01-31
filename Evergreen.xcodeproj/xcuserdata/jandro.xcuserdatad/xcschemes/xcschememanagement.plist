@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>EvergreenOSX.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -18,6 +23,16 @@
 			<true/>
 		</dict>
 		<key>B1831AB21C5E5A4E00DC2D23</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B1831AC71C5E5B3400DC2D23</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B1831AD01C5E5B3400DC2D23</key>
 		<dict>
 			<key>primary</key>
 			<true/>
