@@ -528,6 +528,7 @@
 				);
 				INFOPLIST_FILE = Evergreen/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.filtercode.Evergreen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -550,6 +551,7 @@
 				);
 				INFOPLIST_FILE = Evergreen/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.filtercode.Evergreen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -580,7 +582,6 @@
 		B1831ADA1C5E5B3400DC2D23 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -594,7 +595,7 @@
 				INFOPLIST_FILE = EvergreenOSX/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.filtercode.EvergreenOSX;
 				PRODUCT_NAME = Evergreen;
 				SDKROOT = macosx;
@@ -605,7 +606,6 @@
 		B1831ADB1C5E5B3400DC2D23 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -619,7 +619,7 @@
 				INFOPLIST_FILE = EvergreenOSX/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.filtercode.EvergreenOSX;
 				PRODUCT_NAME = Evergreen;
 				SDKROOT = macosx;
@@ -646,6 +646,7 @@
 				B1831ABF1C5E5A4E00DC2D23 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B1831AC01C5E5A4E00DC2D23 /* Build configuration list for PBXNativeTarget "EvergreenTests" */ = {
 			isa = XCConfigurationList;
@@ -654,6 +655,7 @@
 				B1831AC21C5E5A4E00DC2D23 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B1831AD91C5E5B3400DC2D23 /* Build configuration list for PBXNativeTarget "EvergreenOSX" */ = {
 			isa = XCConfigurationList;
@@ -662,6 +664,7 @@
 				B1831ADB1C5E5B3400DC2D23 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
