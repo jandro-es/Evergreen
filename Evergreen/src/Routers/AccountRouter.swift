@@ -1,6 +1,6 @@
 //
-//  EvergreenTests.swift
-//  EvergreenTests
+//  AccountRouter.swift
+//  Evergreen
 //
 //  Created by Alejandro Barros Cuetos on 31/01/2016.
 //  Copyright © 2016 Alejandro Barros Cuetos. All rights reserved.
@@ -28,31 +28,41 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //
 
-import XCTest
-@testable import Evergreen
+import Foundation
+import Alamofire
 
-class EvergreenTests: XCTestCase {
+enum AccountRouter: URLRequestConvertible {
     
-    private let kApiTestToken = "Enter your Digital Ocean API token to test"
+    case ReadAccount(String)
     
-    var readAccountExpectation: XCTestExpectation?
-    
-    func testReadAccount() {
-        readAccountExpectation = expectationWithDescription("Read Account expectation")
-        Evergreen.fetchAccountInfo(kApiTestToken, onCompletion: { (account) -> Void in
-            if let realAccount = account {
-                print(realAccount)
-                self.readAccountExpectation?.fulfill()
-            }
-            }) { (error) -> Void in
-                if let error = error {
-                    assertionFailure("Error while fetching account: \(error)")
-                }
+    var method: Alamofire.Method {
+        switch self {
+        case .ReadAccount:
+            return .GET
         }
-        waitForExpectationsWithTimeout(5.0) { (error) -> Void in
-            if error != nil {
-                print("Error while waiting: \(error?.localizedDescription)")
-            }
+    }
+    
+    var path: String {
+        switch self {
+        case .ReadAccount(_):
+            return "/account"
+        }
+    }
+    
+    // MARK: URLRequestConvertible
+    
+    var URLRequest: NSMutableURLRequest {
+        let URL = NSURL(string: Evergreen.kBaseURLString)!
+        let mutableURLRequest = NSMutableURLRequest(URL: URL.URLByAppendingPathComponent(path))
+        mutableURLRequest.HTTPMethod = method.rawValue
+        
+        mutableURLRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        mutableURLRequest.setValue("application/json", forHTTPHeaderField: "Accept")
+
+        switch self {
+        case .ReadAccount(let apiKey):
+            mutableURLRequest.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: nil).0
         }
     }
 }
