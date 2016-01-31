@@ -2,6 +2,9 @@
 //  Account.swift
 //  Evergreen
 //
+//  Created by Alejandro Barros Cuetos on 31/01/2016.
+//  Copyright © 2016 Alejandro Barros Cuetos. All rights reserved.
+//
 //  Redistribution and use in source and binary forms, with or without
 //  modification, are permitted provided that the following conditions are met:
 //
@@ -64,7 +67,6 @@ public struct Account: EvergreenObjectable {
     // MARK: - Initializers
     
     public init?(data: JSONDictionary) {
-        
         guard let accountData = data[_baseNode] as? JSONDictionary else { return nil }
         guard let email = accountData[_dataKeys.Email.rawValue] as? String,
             uuid = accountData[_dataKeys.UUID.rawValue] as? String,
@@ -92,25 +94,17 @@ public struct Account: EvergreenObjectable {
     }
     
     public init?(response: NSHTTPURLResponse, representation: AnyObject) {
-        
         guard let jsonDictionary = representation as? JSONDictionary else { return nil }
         
         self.init(data: jsonDictionary)
     }
 }
 
-// MARK: - CustomDebugStringConvertible
-
-extension Account: CustomDebugStringConvertible {
-    
-    public var debugDescription: String { return "Account:\n email: \(email)\n uuid: \(uuid)\n droplet_limit: \(dropletLimit)\n  floating_ip_limit: \(floatingIPLimit)\n status: \(accountStatus.rawValue)\n status_message: \(accountStatusMessage)\n  email_verified: \(emailVerified)\n" }
-}
-
 // MARK: - CustomStringConvertible
 
 extension Account: CustomStringConvertible {
     
-    public var description: String { return "Account:\n email: \(email)\n uuid: \(uuid)\n"  }
+    public var description: String { return "Account:\nemail: \(email)\nuuid: \(uuid)\ndroplet_limit: \(dropletLimit)\nfloating_ip_limit: \(floatingIPLimit)\nstatus: \(accountStatus.rawValue)\nstatus_message: \(accountStatusMessage)\nemail_verified: \(emailVerified)\n" }
 }
 
 public func ==(lhs: Account, rhs: Account) -> Bool { return lhs.email == rhs.email && lhs.uuid == rhs.uuid }

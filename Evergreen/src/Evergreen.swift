@@ -28,6 +28,7 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 
 import Foundation
+import Alamofire
 
 public let kEvergreenErrorDomain: String = "com.filtercode.evergreen"
 
@@ -36,4 +37,27 @@ public typealias JSONArray = [JSONDictionary]
 
 public class Evergreen {
     
+    public static let kBaseURLString = "https://api.digitalocean.com/v2"
+    
+    /**
+     API endpoint to get the information of the main account for the given API Token
+     
+     - parameter apiKey:       Digital Ocean API Token
+     - parameter queue:        dispatch_queue_t to execute the handlers
+     - parameter onCompletion: On success handler
+     - parameter onError:      On error handler
+     */
+    public class func fetchAccountInfo(apiKey: String, queue: dispatch_queue_t = dispatch_get_main_queue(), onCompletion: (Account?) -> Void, onError: (NSError?) -> Void) {
+        Alamofire.request(AccountRouter.ReadAccount(apiKey)).responseEvergreen { (response: Response<Account, NSError>) -> Void in
+            if response.result.isSuccess {
+                dispatch_async(queue) {
+                    onCompletion(response.result.value)
+                }
+            } else {
+                dispatch_async(queue) {
+                    onError(response.result.error)
+                }
+            }
+        }
+    }
 }

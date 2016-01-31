@@ -23,6 +23,8 @@
 		B1831AF31C5E63B700DC2D23 /* EvergreenCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1831AF11C5E63B700DC2D23 /* EvergreenCollection.swift */; };
 		B1831AF61C5E642600DC2D23 /* Request+Evergreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1831AF51C5E642600DC2D23 /* Request+Evergreen.swift */; };
 		B1831AF71C5E642600DC2D23 /* Request+Evergreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1831AF51C5E642600DC2D23 /* Request+Evergreen.swift */; };
+		B1831AFD1C5E68C000DC2D23 /* AccountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1831AFC1C5E68C000DC2D23 /* AccountRouter.swift */; };
+		B1831AFE1C5E68C000DC2D23 /* AccountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1831AFC1C5E68C000DC2D23 /* AccountRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,7 @@
 		B1831AEE1C5E637A00DC2D23 /* EvergreenObjectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EvergreenObjectable.swift; path = src/Protocols/EvergreenObjectable.swift; sourceTree = "<group>"; };
 		B1831AF11C5E63B700DC2D23 /* EvergreenCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EvergreenCollection.swift; path = src/Protocols/EvergreenCollection.swift; sourceTree = "<group>"; };
 		B1831AF51C5E642600DC2D23 /* Request+Evergreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Request+Evergreen.swift"; path = "src/Extensions/Request+Evergreen.swift"; sourceTree = "<group>"; };
+		B1831AFC1C5E68C000DC2D23 /* AccountRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountRouter.swift; path = src/Routers/AccountRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +137,7 @@
 		B1831ADF1C5E5D5400DC2D23 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				B1831AFB1C5E68A500DC2D23 /* Routers */,
 				B1831AF41C5E63EA00DC2D23 /* Extensions */,
 				B1831AEA1C5E62CC00DC2D23 /* Protocols */,
 				B1831AE01C5E5D6100DC2D23 /* Models */,
@@ -190,6 +194,14 @@
 				B1831AE41C5E5DE400DC2D23 /* Alamofire.framework */,
 			);
 			name = OSX;
+			sourceTree = "<group>";
+		};
+		B1831AFB1C5E68A500DC2D23 /* Routers */ = {
+			isa = PBXGroup;
+			children = (
+				B1831AFC1C5E68C000DC2D23 /* AccountRouter.swift */,
+			);
+			name = Routers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -372,6 +384,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1831AFD1C5E68C000DC2D23 /* AccountRouter.swift in Sources */,
 				B1831AE21C5E5D7A00DC2D23 /* Account.swift in Sources */,
 				B1831AEC1C5E630500DC2D23 /* Evergreen.swift in Sources */,
 				B1831AEF1C5E637A00DC2D23 /* EvergreenObjectable.swift in Sources */,
@@ -392,6 +405,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1831AFE1C5E68C000DC2D23 /* AccountRouter.swift in Sources */,
 				B1831AE31C5E5D8300DC2D23 /* Account.swift in Sources */,
 				B1831AED1C5E630500DC2D23 /* Evergreen.swift in Sources */,
 				B1831AF01C5E637A00DC2D23 /* EvergreenObjectable.swift in Sources */,
