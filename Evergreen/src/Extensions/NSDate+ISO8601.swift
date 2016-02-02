@@ -1,8 +1,8 @@
 //
-//  AccountRouter.swift
+//  NSDate+ISO8601.swift
 //  Evergreen
 //
-//  Created by Alejandro Barros Cuetos on 31/01/2016.
+//  Created by Alejandro Barros Cuetos on 01/02/2016.
 //  Copyright © 2016 Alejandro Barros Cuetos. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without
@@ -29,47 +29,40 @@
 //
 
 import Foundation
-import Alamofire
 
-enum AccountRouter: URLRequestConvertible {
+public extension NSDate {
     
     /**
-     *  Gets the account information
-     *
-     *  @param String API Key
-     *
-     *  @return API Endpoint
+     Returns a NSDate from a string formated with ISO8601
+     
+     - parameter string: The string to convert to NSDate
+     
+     - returns: An optional NSDate
      */
-    case ReadAccount(String)
-    
-    var method: Alamofire.Method {
-        switch self {
-        case .ReadAccount:
-            return .GET
-        }
-    }
-    
-    var path: String {
-        switch self {
-        case .ReadAccount(_):
-            return "/account"
-        }
-    }
-    
-    // MARK: URLRequestConvertible
-    
-    var URLRequest: NSMutableURLRequest {
-        let URL = NSURL(string: Evergreen.kBaseURLString)!
-        let mutableURLRequest = NSMutableURLRequest(URL: URL.URLByAppendingPathComponent(path))
-        mutableURLRequest.HTTPMethod = method.rawValue
+    public class func dateFromISO8601(string: String) -> NSDate? {
         
-        mutableURLRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        mutableURLRequest.setValue("application/json", forHTTPHeaderField: "Accept")
-
-        switch self {
-        case .ReadAccount(let apiKey):
-            mutableURLRequest.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
-            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: nil).0
-        }
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        dateFormatter.timeZone = NSTimeZone.localTimeZone()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        
+        return dateFormatter.dateFromString(string)
+    }
+    
+    /**
+     Transforms a NSDate object into a ISO8601 formated string
+     
+     - parameter date: The NSDate object to transform
+     
+     - returns: The string representing the ISO8601 date
+     */
+    public class func ISO8601FromNSDate(date: NSDate) -> String {
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        dateFormatter.timeZone = NSTimeZone(abbreviation: "GMT")
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+        
+        return dateFormatter.stringFromDate(date).stringByAppendingString("Z")
     }
 }

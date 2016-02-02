@@ -35,23 +35,23 @@ import Foundation
 public protocol EvergreenCollection {
     
     /**
-     Static method to create a Collection of EvergreenObjects
+     Failable initializer to create an Evergreen object from
+     a JSONDictionary adding the base node to the representation
      
-     - parameter dataCollection: a JSONArray with the pertinent data
+     - parameter baseNode: base node name
+     - parameter data: The JSONDictionary with the needed data
      
-     - throws: EvergreenErrors
-     
-     - returns: an Array of T objects, where T complies to EvergreenObjectable
+     - returns: nil if impossible to create the object
      */
-    static func collection<T:EvergreenObjectable>(dataCollection: JSONArray) throws -> [T]
+    init?(baseNode: String, data: JSONDictionary)
     
     /**
-     Static method to create a Collection of EvergreenObjects
+     Static method to create a collection on EvergreenObject from an JSON response
      
      - parameter response:       NSHTTPURLResponse
-     - parameter representation: JSONArray
+     - parameter representation: A representation of the response
      
-     - returns: an Array of T objects, where T complies to EvergreenObjectable
+     - returns: A collection of the same type
      */
     static func collection(response response: NSHTTPURLResponse, representation: AnyObject) -> [Self]
 }
