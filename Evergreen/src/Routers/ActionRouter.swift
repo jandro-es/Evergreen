@@ -1,8 +1,8 @@
 //
-//  AccountRouter.swift
+//  ActionRouter.swift
 //  Evergreen
 //
-//  Created by Alejandro Barros Cuetos on 31/01/2016.
+//  Created by Alejandro Barros Cuetos on 01/02/2016.
 //  Copyright © 2016 Alejandro Barros Cuetos. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without
@@ -31,28 +31,41 @@
 import Foundation
 import Alamofire
 
-enum AccountRouter: URLRequestConvertible {
+enum ActionRouter: URLRequestConvertible {
     
     /**
-     *  Gets the account information
+     *  Gets the info of a single action
+     *
+     *  @param String API Key
+     *  @param Int    ActionID
+     *
+     *  @return API Endpoint
+     */
+    case ReadAction(String, Int)
+    
+    /**
+     *  Gets all the actions of the account
      *
      *  @param String API Key
      *
      *  @return API Endpoint
      */
-    case ReadAccount(String)
+    case ReadActions(String)
     
     var method: Alamofire.Method {
         switch self {
-        case .ReadAccount:
+        case .ReadAction, .ReadActions:
             return .GET
         }
     }
     
     var path: String {
         switch self {
-        case .ReadAccount(_):
-            return "/account"
+        case .ReadAction(_, let actionId):
+            return "/actions/\(actionId)"
+        
+        case .ReadActions(_):
+            return "/actions"
         }
     }
     
@@ -65,9 +78,13 @@ enum AccountRouter: URLRequestConvertible {
         
         mutableURLRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         mutableURLRequest.setValue("application/json", forHTTPHeaderField: "Accept")
-
+        
         switch self {
-        case .ReadAccount(let apiKey):
+        case .ReadAction(let apiKey, _):
+            mutableURLRequest.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: nil).0
+            
+        case .ReadActions(let apiKey):
             mutableURLRequest.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
             return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: nil).0
         }

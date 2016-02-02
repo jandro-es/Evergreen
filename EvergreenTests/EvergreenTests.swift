@@ -35,18 +35,37 @@ class EvergreenTests: XCTestCase {
     
     private let kApiTestToken = "Enter your Digital Ocean API token to test"
     
-    var readAccountExpectation: XCTestExpectation?
+    var asyncExpectation: XCTestExpectation?
     
     func testReadAccount() {
-        readAccountExpectation = expectationWithDescription("Read Account expectation")
-        Evergreen.fetchAccountInfo(kApiTestToken, onCompletion: { (account) -> Void in
+        asyncExpectation = expectationWithDescription("Read Account expectation")
+        Evergreen.fetchAccount(kApiTestToken, onCompletion: { (account) -> Void in
             if let realAccount = account {
                 print(realAccount)
-                self.readAccountExpectation?.fulfill()
+                self.asyncExpectation?.fulfill()
             }
             }) { (error) -> Void in
                 if let error = error {
                     assertionFailure("Error while fetching account: \(error)")
+                }
+        }
+        waitForExpectationsWithTimeout(5.0) { (error) -> Void in
+            if error != nil {
+                print("Error while waiting: \(error?.localizedDescription)")
+            }
+        }
+    }
+    
+    func testReadActions() {
+        asyncExpectation = expectationWithDescription("Read Actions expectation")
+        Evergreen.fetchActions(kApiTestToken, onCompletion: { (actions) -> Void in
+            if let actions = actions {
+                print(actions)
+                self.asyncExpectation?.fulfill()
+            }
+            }) { (error) -> Void in
+                if let error = error {
+                    assertionFailure("Error while fetching actions: \(error)")
                 }
         }
         waitForExpectationsWithTimeout(5.0) { (error) -> Void in
