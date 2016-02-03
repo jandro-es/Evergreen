@@ -29,20 +29,11 @@
 //
 
 import Foundation
+import Freddy
 
 /// Protocol for creation of single Evergreen objects.
 
 public protocol EvergreenObjectable {
-    
-    /**
-     Failable initializer to create an Evergreen object from
-     a JSONDictionary
-     
-     - parameter data: The JSONDictionary with the needed data
-     
-     - returns: nil if impossible to create the object
-     */
-    init?(data: JSONDictionary)
     
     /**
      Failable initializer to create an Evergreen object from
@@ -54,4 +45,16 @@ public protocol EvergreenObjectable {
      - returns: nil if impossible to create the object
      */
     init?(response: NSHTTPURLResponse, representation: AnyObject)
+}
+
+extension EvergreenObjectable where Self: JSONDecodable {
+    
+    public init?(response: NSHTTPURLResponse, representation: AnyObject) {
+        do {
+            let json = try JSON(data: representation as! NSData)
+            try self.init(json: json)
+        } catch {
+            return nil
+        }
+    }
 }

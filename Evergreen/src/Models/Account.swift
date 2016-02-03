@@ -29,12 +29,13 @@
 //
 
 import Foundation
+import Freddy
 
 public struct Account: EvergreenObjectable {
     
     // MARK: - Private Properties
     
-    private let _baseNode = "account"
+    private static let _kBaseNode = "account"
     
     private enum _dataKeys: String {
         
@@ -63,40 +64,30 @@ public struct Account: EvergreenObjectable {
     public let floatingIPLimit: Int
     public let accountStatus: Status
     public let accountStatusMessage: String
+}
+
+// MARK: - JSONDecodable
+
+extension Account: JSONDecodable {
     
-    // MARK: - Initializers
-    
-    public init?(data: JSONDictionary) {
-        guard let accountData = data[_baseNode] as? JSONDictionary else { return nil }
-        guard let email = accountData[_dataKeys.Email.rawValue] as? String,
-            uuid = accountData[_dataKeys.UUID.rawValue] as? String,
-            dropletLimit = accountData[_dataKeys.DropletLimit.rawValue] as? Int,
-            floatingIPLimit = accountData[_dataKeys.FloatingIPLimit.rawValue] as? Int,
-            accountString = accountData[_dataKeys.Status.rawValue] as? String,
-            accountStatus = Status(rawValue: accountString),
-            emailVerified = accountData[_dataKeys.EmailVerified.rawValue] as? Bool
-            else {
-                return nil
-        }
-        
-        self.email = email
-        self.uuid = uuid
-        self.dropletLimit = dropletLimit
-        self.floatingIPLimit = floatingIPLimit
-        self.accountStatus = accountStatus
-        self.emailVerified = emailVerified
-        
-        if let accountText = accountData[_dataKeys.StatusMessage.rawValue] as? String {
-            self.accountStatusMessage = accountText
-        } else {
-            self.accountStatusMessage = ""
-        }
+    public init(json: Freddy.JSON) throws {
+        let accountJson = try JSON(json.dictionary(Account._kBaseNode))
+        uuid = try accountJson.string(_dataKeys.UUID.rawValue)
+        email = try accountJson.string(_dataKeys.Email.rawValue)
+        dropletLimit = try accountJson.int(_dataKeys.DropletLimit.rawValue)
+        emailVerified = try accountJson.bool(_dataKeys.EmailVerified.rawValue)
+        floatingIPLimit = try accountJson.int(_dataKeys.FloatingIPLimit.rawValue)
+        accountStatus = try Status(rawValue: accountJson.string(_dataKeys.Status.rawValue))!
+        accountStatusMessage = try accountJson.string(_dataKeys.StatusMessage.rawValue)
     }
+}
+
+// MARK: - JSONEncodable
+
+extension Account: JSONEncodable {
     
-    public init?(response: NSHTTPURLResponse, representation: AnyObject) {
-        guard let jsonDictionary = representation as? JSONDictionary else { return nil }
-        
-        self.init(data: jsonDictionary)
+    public func toJSON() -> JSON {
+        return .Dictionary([_dataKeys.UUID.rawValue: .String(uuid), _dataKeys.Email.rawValue: .String(email), _dataKeys.DropletLimit.rawValue: .Int(dropletLimit), _dataKeys.EmailVerified.rawValue: .Bool(emailVerified), _dataKeys.FloatingIPLimit.rawValue: .Int(floatingIPLimit), _dataKeys.Status.rawValue: .String(accountStatus.rawValue), _dataKeys.StatusMessage.rawValue: .String(accountStatusMessage)])
     }
 }
 

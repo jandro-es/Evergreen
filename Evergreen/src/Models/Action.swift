@@ -29,6 +29,7 @@
 //
 
 import Foundation
+import Freddy
 
 public struct Action: EvergreenObjectable {
     
@@ -37,9 +38,6 @@ public struct Action: EvergreenObjectable {
     // MARK: - Private Properties
     
     private static let _kBaseNode = "action"
-    private static let _kMetaNode = "meta"
-    private static let _kLinksNode = "links"
-    private static let _kCollectionNode = "actions"
     
     private enum _dataKeys: String {
         
@@ -65,42 +63,32 @@ public struct Action: EvergreenObjectable {
     public let actionId: Int
     public let status: Status
     public let actionType: String
-    public let completedAt: NSDate
-    public let startedAt: NSDate
+    public let completedAt: NSDate?
+    public let startedAt: NSDate?
     public let resourceId: Int
     public let resourceType: String
     public let regionSlug: String?
+}
+
+// MARK: - JSONDecodable
+
+extension Action: JSONDecodable {
     
-    // MARK: - Initializers
-    
-    public init?(data: JSONDictionary) {
-        guard let actionData = data[Action._kBaseNode] as? JSONDictionary else { return nil }
-        guard let actionId = actionData[_dataKeys.ActionId.rawValue] as? Int,
-            statusString = actionData[_dataKeys.Status.rawValue] as? String,
-            status = Status(rawValue: statusString),
-            actionType = actionData[_dataKeys.ActionType.rawValue] as? String,
-            resourceId = actionData[_dataKeys.ResourceId.rawValue] as? Int,
-            resourceType = actionData[_dataKeys.ResourceType.rawValue] as? String,
-            startedAtString = actionData[_dataKeys.StartedAt.rawValue] as? String,
-            completedAtString = actionData[_dataKeys.CompletedAt.rawValue] as? String
-            else {
-                return nil
+    public init(json: Freddy.JSON) throws {
+        let actionJSON: JSON
+        do {
+            actionJSON = try JSON(json.dictionary(Action._kBaseNode))
+        } catch {
+            actionJSON = json
         }
-        
-        self.actionId = actionId
-        self.status = status
-        self.actionType = actionType
-        self.resourceId = resourceId
-        self.resourceType = resourceType
-        self.regionSlug = actionData[_dataKeys.RegionSlug.rawValue] as? String
-        self.startedAt = NSDate.dateFromISO8601(startedAtString) ?? NSDate()
-        self.completedAt = NSDate.dateFromISO8601(completedAtString) ?? NSDate()
-    }
-    
-    public init?(response: NSHTTPURLResponse, representation: AnyObject) {
-        guard let jsonDictionary = representation as? JSONDictionary else { return nil }
-        
-        self.init(data: jsonDictionary)
+        actionId = try actionJSON.int(_dataKeys.ActionId.rawValue)
+        status = try Status(rawValue: actionJSON.string(_dataKeys.Status.rawValue))!
+        actionType = try actionJSON.string(_dataKeys.ActionType.rawValue)
+        resourceId = try actionJSON.int(_dataKeys.ResourceId.rawValue)
+        resourceType   = try actionJSON.string(_dataKeys.ResourceType.rawValue)
+        regionSlug = try actionJSON.string(_dataKeys.RegionSlug.rawValue)
+        startedAt = try NSDate.dateFromISO8601(actionJSON.string(_dataKeys.StartedAt.rawValue))
+        completedAt = try NSDate.dateFromISO8601(actionJSON.string(_dataKeys.CompletedAt.rawValue))
     }
 }
 
@@ -111,29 +99,45 @@ extension Action: CustomStringConvertible {
     public var description: String { return "Action:\nid: \(actionId)\ntype: \(actionType)\nstatus: \(status.rawValue)\ncompletedAt: \(completedAt)\nstartedAt: \(startedAt)\ncompleteAt: \(completedAt)\nresourceId: \(resourceId)\nresourceType: \(resourceType)\nregionSlug: \(regionSlug)\n\n" }
 }
 
-// MARK: - EvergreenCollection
+public struct Actions: EvergreenCollection, JSONDecodable {
+    
+    // MARK: - Private properties
+    
+    private enum _dataKeys: String {
+        
+        case MetaNode = "meta"
+        case LinksNode = "links"
+        case CollectionNode = "actions"
+        case MetaTotalLeaf = "total"
+        case LinksPagesNode = "pages"
+        case LinksPageLastLeaf = "last"
+        case LinksPageNextLeaf = "next"
 
-extension Action: EvergreenCollection {
-    
-    public init?(baseNode: String, data: JSONDictionary) {
-    
-        self.init(data: [baseNode: data])
     }
     
-    public static func collection(response response: NSHTTPURLResponse, representation: AnyObject) -> [Action] {
-        
-        guard let data = (representation as? JSONDictionary)?[Action._kCollectionNode] as? JSONArray else {
-            fatalError("Error while casting representation to JSONDictionary")
-        }
-        var collection = [Action]()
-        for itemData: JSONDictionary in data  {
-            if let action = Action(baseNode: Action._kBaseNode, data: itemData) {
-                collection.append(action)
-            }
-        }
-        
-        return collection
+    // MARK: - Public properties
+    
+    public var items: [Action]
+
+    public var totalCount: Int
+    
+    public var nextPage: Int?
+    
+    public var lastPage: Int?
+    
+    public init(json: JSON) throws {
+        items = try json.array(_dataKeys.CollectionNode.rawValue).map(Action.init)
+        totalCount = try json.int(_dataKeys.MetaNode.rawValue, _dataKeys.MetaTotalLeaf.rawValue)
+       // nextPage = try json.int(_dataKeys.LinksNode.rawValue, _dataKeys.LinksPagesNode.rawValue, _dataKeys.LinksPageNextLeaf.rawValue)
+       // lastPage = try json.int(_dataKeys.LinksNode.rawValue, _dataKeys.LinksPagesNode.rawValue, _dataKeys.LinksPageLastLeaf.rawValue)
     }
+}
+
+// MARK: - CustomStringConvertible
+
+extension Actions: CustomStringConvertible {
+    
+    public var description: String { return "Actions:\ntotalCount: \(totalCount)\ncount: \(count)\nnextPage: \(nextPage)\nlastPage: \(lastPage)\nitems: \(items)\n\n" }
 }
 
 public func ==(lhs: Action, rhs: Action) -> Bool { return lhs.actionId == rhs.actionId && lhs.actionType == rhs.actionType }

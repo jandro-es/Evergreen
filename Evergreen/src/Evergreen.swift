@@ -92,8 +92,8 @@ public class Evergreen {
      - parameter onCompletion: On success handler
      - parameter onError:      On error handler
      */
-    public class func fetchActions(apiKey: String, queue: dispatch_queue_t = dispatch_get_main_queue(), onCompletion: ([Action]?) -> Void, onError: (NSError?) -> Void) {
-        Alamofire.request(ActionRouter.ReadActions(apiKey)).responseEvergreen { (response: Response<[Action], NSError>) -> Void in
+    public class func fetchActions(apiKey: String, queue: dispatch_queue_t = dispatch_get_main_queue(), onCompletion: (Actions?) -> Void, onError: (NSError?) -> Void) {
+        Alamofire.request(ActionRouter.ReadActions(apiKey)).responseEvergreen { (response: Response<Actions, NSError>) -> Void in
             if response.result.isSuccess {
                 dispatch_async(queue) {
                     onCompletion(response.result.value)

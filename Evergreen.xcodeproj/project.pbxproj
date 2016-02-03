@@ -31,6 +31,8 @@
 		B1831AF71C5E642600DC2D23 /* Request+Evergreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1831AF51C5E642600DC2D23 /* Request+Evergreen.swift */; };
 		B1831AFD1C5E68C000DC2D23 /* AccountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1831AFC1C5E68C000DC2D23 /* AccountRouter.swift */; };
 		B1831AFE1C5E68C000DC2D23 /* AccountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1831AFC1C5E68C000DC2D23 /* AccountRouter.swift */; };
+		B1C5E6F11C6166DA003DBAA6 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C5E6F01C6166DA003DBAA6 /* Freddy.framework */; };
+		B1C5E6F31C6166F1003DBAA6 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C5E6F21C6166F1003DBAA6 /* Freddy.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,8 @@
 		B1831AF11C5E63B700DC2D23 /* EvergreenCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EvergreenCollection.swift; path = src/Protocols/EvergreenCollection.swift; sourceTree = "<group>"; };
 		B1831AF51C5E642600DC2D23 /* Request+Evergreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Request+Evergreen.swift"; path = "src/Extensions/Request+Evergreen.swift"; sourceTree = "<group>"; };
 		B1831AFC1C5E68C000DC2D23 /* AccountRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountRouter.swift; path = src/Routers/AccountRouter.swift; sourceTree = "<group>"; };
+		B1C5E6F01C6166DA003DBAA6 /* Freddy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Freddy.framework; path = Carthage/Build/iOS/Freddy.framework; sourceTree = "<group>"; };
+		B1C5E6F21C6166F1003DBAA6 /* Freddy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Freddy.framework; path = Carthage/Build/Mac/Freddy.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1C5E6F11C6166DA003DBAA6 /* Freddy.framework in Frameworks */,
 				B1831AE71C5E5DF100DC2D23 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -87,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1C5E6F31C6166F1003DBAA6 /* Freddy.framework in Frameworks */,
 				B1831AE51C5E5DE400DC2D23 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -194,6 +200,7 @@
 		B1831AF91C5E649D00DC2D23 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				B1C5E6F01C6166DA003DBAA6 /* Freddy.framework */,
 				B1831AE61C5E5DF100DC2D23 /* Alamofire.framework */,
 			);
 			name = iOS;
@@ -202,6 +209,7 @@
 		B1831AFA1C5E64A200DC2D23 /* OSX */ = {
 			isa = PBXGroup;
 			children = (
+				B1C5E6F21C6166F1003DBAA6 /* Freddy.framework */,
 				B1831AE41C5E5DE400DC2D23 /* Alamofire.framework */,
 			);
 			name = OSX;
@@ -366,6 +374,7 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Freddy.framework",
 			);
 			name = "Carthage copy frameworks";
 			outputPaths = (
@@ -381,6 +390,7 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/Mac/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Freddy.framework",
 			);
 			name = "Carthage copy frameworks";
 			outputPaths = (
