@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B12BE6401C641A8A0065408D /* NSURL+Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C5E6F71C6414D1003DBAA6 /* NSURL+Parameter.swift */; };
 		B1382DC51C6015AE00734374 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1382DC41C6015AE00734374 /* Action.swift */; };
 		B1382DC61C6015AE00734374 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1382DC41C6015AE00734374 /* Action.swift */; };
 		B1382DC81C60198500734374 /* NSDate+ISO8601.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1382DC71C60198500734374 /* NSDate+ISO8601.swift */; };
@@ -31,6 +32,20 @@
 		B1831AF71C5E642600DC2D23 /* Request+Evergreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1831AF51C5E642600DC2D23 /* Request+Evergreen.swift */; };
 		B1831AFD1C5E68C000DC2D23 /* AccountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1831AFC1C5E68C000DC2D23 /* AccountRouter.swift */; };
 		B1831AFE1C5E68C000DC2D23 /* AccountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1831AFC1C5E68C000DC2D23 /* AccountRouter.swift */; };
+		B1C5E6F11C6166DA003DBAA6 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C5E6F01C6166DA003DBAA6 /* Freddy.framework */; };
+		B1C5E6F31C6166F1003DBAA6 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C5E6F21C6166F1003DBAA6 /* Freddy.framework */; };
+		B1C5E6F51C640D45003DBAA6 /* EvergreenExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C5E6F41C640D45003DBAA6 /* EvergreenExtensionsTests.swift */; };
+		B1C5E6F61C6413CE003DBAA6 /* NSDate+ISO8601.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1382DC71C60198500734374 /* NSDate+ISO8601.swift */; };
+		B1C5E6F81C6414D1003DBAA6 /* NSURL+Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C5E6F71C6414D1003DBAA6 /* NSURL+Parameter.swift */; };
+		B1C5E6F91C6414D1003DBAA6 /* NSURL+Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C5E6F71C6414D1003DBAA6 /* NSURL+Parameter.swift */; };
+		B1D472C61C66736500CD1353 /* EvergreenPagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D472C51C66736500CD1353 /* EvergreenPagination.swift */; };
+		B1D472C71C66736500CD1353 /* EvergreenPagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D472C51C66736500CD1353 /* EvergreenPagination.swift */; };
+		B1D472C91C66739800CD1353 /* EvergreenCollectionPagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D472C81C66739800CD1353 /* EvergreenCollectionPagination.swift */; };
+		B1D472CA1C66739800CD1353 /* EvergreenCollectionPagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D472C81C66739800CD1353 /* EvergreenCollectionPagination.swift */; };
+		B1D472CC1C6673F500CD1353 /* EvergreenCollectionDataParsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D472CB1C6673F500CD1353 /* EvergreenCollectionDataParsable.swift */; };
+		B1D472CD1C6673F500CD1353 /* EvergreenCollectionDataParsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D472CB1C6673F500CD1353 /* EvergreenCollectionDataParsable.swift */; };
+		B1D472CF1C66748D00CD1353 /* EvergreenCollectionDataKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D472CE1C66748D00CD1353 /* EvergreenCollectionDataKeys.swift */; };
+		B1D472D01C66748D00CD1353 /* EvergreenCollectionDataKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D472CE1C66748D00CD1353 /* EvergreenCollectionDataKeys.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +79,14 @@
 		B1831AF11C5E63B700DC2D23 /* EvergreenCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EvergreenCollection.swift; path = src/Protocols/EvergreenCollection.swift; sourceTree = "<group>"; };
 		B1831AF51C5E642600DC2D23 /* Request+Evergreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Request+Evergreen.swift"; path = "src/Extensions/Request+Evergreen.swift"; sourceTree = "<group>"; };
 		B1831AFC1C5E68C000DC2D23 /* AccountRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountRouter.swift; path = src/Routers/AccountRouter.swift; sourceTree = "<group>"; };
+		B1C5E6F01C6166DA003DBAA6 /* Freddy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Freddy.framework; path = Carthage/Build/iOS/Freddy.framework; sourceTree = "<group>"; };
+		B1C5E6F21C6166F1003DBAA6 /* Freddy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Freddy.framework; path = Carthage/Build/Mac/Freddy.framework; sourceTree = "<group>"; };
+		B1C5E6F41C640D45003DBAA6 /* EvergreenExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EvergreenExtensionsTests.swift; sourceTree = "<group>"; };
+		B1C5E6F71C6414D1003DBAA6 /* NSURL+Parameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSURL+Parameter.swift"; path = "src/Extensions/NSURL+Parameter.swift"; sourceTree = "<group>"; };
+		B1D472C51C66736500CD1353 /* EvergreenPagination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EvergreenPagination.swift; path = src/Types/EvergreenPagination.swift; sourceTree = "<group>"; };
+		B1D472C81C66739800CD1353 /* EvergreenCollectionPagination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EvergreenCollectionPagination.swift; path = src/Protocols/EvergreenCollectionPagination.swift; sourceTree = "<group>"; };
+		B1D472CB1C6673F500CD1353 /* EvergreenCollectionDataParsable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EvergreenCollectionDataParsable.swift; path = src/Protocols/EvergreenCollectionDataParsable.swift; sourceTree = "<group>"; };
+		B1D472CE1C66748D00CD1353 /* EvergreenCollectionDataKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EvergreenCollectionDataKeys.swift; path = src/Types/EvergreenCollectionDataKeys.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1C5E6F11C6166DA003DBAA6 /* Freddy.framework in Frameworks */,
 				B1831AE71C5E5DF100DC2D23 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -87,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1C5E6F31C6166F1003DBAA6 /* Freddy.framework in Frameworks */,
 				B1831AE51C5E5DE400DC2D23 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -119,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				B1831ADF1C5E5D5400DC2D23 /* Source */,
+				B1831AEB1C5E630500DC2D23 /* Evergreen.swift */,
 				B1831AAC1C5E5A4E00DC2D23 /* Evergreen.h */,
 				B1831AAE1C5E5A4E00DC2D23 /* Info.plist */,
 			);
@@ -130,6 +156,7 @@
 			children = (
 				B1831AB81C5E5A4E00DC2D23 /* EvergreenTests.swift */,
 				B1831ABA1C5E5A4E00DC2D23 /* Info.plist */,
+				B1C5E6F41C640D45003DBAA6 /* EvergreenExtensionsTests.swift */,
 			);
 			path = EvergreenTests;
 			sourceTree = "<group>";
@@ -146,11 +173,11 @@
 		B1831ADF1C5E5D5400DC2D23 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				B1D472C41C66734E00CD1353 /* Types */,
 				B1831AFB1C5E68A500DC2D23 /* Routers */,
 				B1831AF41C5E63EA00DC2D23 /* Extensions */,
 				B1831AEA1C5E62CC00DC2D23 /* Protocols */,
 				B1831AE01C5E5D6100DC2D23 /* Models */,
-				B1831AEB1C5E630500DC2D23 /* Evergreen.swift */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -169,6 +196,8 @@
 			children = (
 				B1831AEE1C5E637A00DC2D23 /* EvergreenObjectable.swift */,
 				B1831AF11C5E63B700DC2D23 /* EvergreenCollection.swift */,
+				B1D472C81C66739800CD1353 /* EvergreenCollectionPagination.swift */,
+				B1D472CB1C6673F500CD1353 /* EvergreenCollectionDataParsable.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -178,6 +207,7 @@
 			children = (
 				B1831AF51C5E642600DC2D23 /* Request+Evergreen.swift */,
 				B1382DC71C60198500734374 /* NSDate+ISO8601.swift */,
+				B1C5E6F71C6414D1003DBAA6 /* NSURL+Parameter.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -194,6 +224,7 @@
 		B1831AF91C5E649D00DC2D23 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				B1C5E6F01C6166DA003DBAA6 /* Freddy.framework */,
 				B1831AE61C5E5DF100DC2D23 /* Alamofire.framework */,
 			);
 			name = iOS;
@@ -202,6 +233,7 @@
 		B1831AFA1C5E64A200DC2D23 /* OSX */ = {
 			isa = PBXGroup;
 			children = (
+				B1C5E6F21C6166F1003DBAA6 /* Freddy.framework */,
 				B1831AE41C5E5DE400DC2D23 /* Alamofire.framework */,
 			);
 			name = OSX;
@@ -214,6 +246,15 @@
 				B1382DCA1C60217D00734374 /* ActionRouter.swift */,
 			);
 			name = Routers;
+			sourceTree = "<group>";
+		};
+		B1D472C41C66734E00CD1353 /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				B1D472C51C66736500CD1353 /* EvergreenPagination.swift */,
+				B1D472CE1C66748D00CD1353 /* EvergreenCollectionDataKeys.swift */,
+			);
+			name = Types;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -366,6 +407,7 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Freddy.framework",
 			);
 			name = "Carthage copy frameworks";
 			outputPaths = (
@@ -381,6 +423,7 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/Mac/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Freddy.framework",
 			);
 			name = "Carthage copy frameworks";
 			outputPaths = (
@@ -399,12 +442,17 @@
 				B1382DCB1C60217D00734374 /* ActionRouter.swift in Sources */,
 				B1831AFD1C5E68C000DC2D23 /* AccountRouter.swift in Sources */,
 				B1831AE21C5E5D7A00DC2D23 /* Account.swift in Sources */,
+				B1D472C61C66736500CD1353 /* EvergreenPagination.swift in Sources */,
 				B1831AEC1C5E630500DC2D23 /* Evergreen.swift in Sources */,
+				B1D472CF1C66748D00CD1353 /* EvergreenCollectionDataKeys.swift in Sources */,
 				B1382DC81C60198500734374 /* NSDate+ISO8601.swift in Sources */,
+				B1C5E6F81C6414D1003DBAA6 /* NSURL+Parameter.swift in Sources */,
+				B1D472CC1C6673F500CD1353 /* EvergreenCollectionDataParsable.swift in Sources */,
 				B1831AEF1C5E637A00DC2D23 /* EvergreenObjectable.swift in Sources */,
 				B1382DC51C6015AE00734374 /* Action.swift in Sources */,
 				B1831AF21C5E63B700DC2D23 /* EvergreenCollection.swift in Sources */,
 				B1831AF61C5E642600DC2D23 /* Request+Evergreen.swift in Sources */,
+				B1D472C91C66739800CD1353 /* EvergreenCollectionPagination.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,7 +460,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B12BE6401C641A8A0065408D /* NSURL+Parameter.swift in Sources */,
+				B1C5E6F61C6413CE003DBAA6 /* NSDate+ISO8601.swift in Sources */,
 				B1831AB91C5E5A4E00DC2D23 /* EvergreenTests.swift in Sources */,
+				B1C5E6F51C640D45003DBAA6 /* EvergreenExtensionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,12 +474,17 @@
 				B1382DCC1C60217D00734374 /* ActionRouter.swift in Sources */,
 				B1831AFE1C5E68C000DC2D23 /* AccountRouter.swift in Sources */,
 				B1831AE31C5E5D8300DC2D23 /* Account.swift in Sources */,
+				B1D472C71C66736500CD1353 /* EvergreenPagination.swift in Sources */,
 				B1831AED1C5E630500DC2D23 /* Evergreen.swift in Sources */,
+				B1D472D01C66748D00CD1353 /* EvergreenCollectionDataKeys.swift in Sources */,
 				B1382DC91C60198500734374 /* NSDate+ISO8601.swift in Sources */,
+				B1C5E6F91C6414D1003DBAA6 /* NSURL+Parameter.swift in Sources */,
+				B1D472CD1C6673F500CD1353 /* EvergreenCollectionDataParsable.swift in Sources */,
 				B1831AF01C5E637A00DC2D23 /* EvergreenObjectable.swift in Sources */,
 				B1382DC61C6015AE00734374 /* Action.swift in Sources */,
 				B1831AF31C5E63B700DC2D23 /* EvergreenCollection.swift in Sources */,
 				B1831AF71C5E642600DC2D23 /* Request+Evergreen.swift in Sources */,
+				B1D472CA1C66739800CD1353 /* EvergreenCollectionPagination.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

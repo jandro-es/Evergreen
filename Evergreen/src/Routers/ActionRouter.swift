@@ -47,10 +47,11 @@ enum ActionRouter: URLRequestConvertible {
      *  Gets all the actions of the account
      *
      *  @param String API Key
+     *  @param Int page number
      *
      *  @return API Endpoint
      */
-    case ReadActions(String)
+    case ReadActions(String, Int)
     
     var method: Alamofire.Method {
         switch self {
@@ -64,7 +65,7 @@ enum ActionRouter: URLRequestConvertible {
         case .ReadAction(_, let actionId):
             return "/actions/\(actionId)"
         
-        case .ReadActions(_):
+        case .ReadActions(_, _):
             return "/actions"
         }
     }
@@ -84,9 +85,9 @@ enum ActionRouter: URLRequestConvertible {
             mutableURLRequest.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
             return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: nil).0
             
-        case .ReadActions(let apiKey):
+        case .ReadActions(let apiKey, let pageNumber):
             mutableURLRequest.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
-            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: nil).0
+            return Alamofire.ParameterEncoding.URLEncodedInURL.encode(mutableURLRequest, parameters: ["page": pageNumber]).0
         }
     }
 }

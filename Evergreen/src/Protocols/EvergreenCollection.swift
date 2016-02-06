@@ -29,29 +29,47 @@
 //
 
 import Foundation
+import Freddy
 
 /// Protocol for the creation of a collection of EvergreenObjects
 
-public protocol EvergreenCollection {
+public protocol EvergreenCollection: EvergreenObjectable, CustomStringConvertible {
+    
+    /// Elements must conform to EvergreenObjectable
+    typealias Element: EvergreenObjectable
+    
+    /// The collection of Elements
+    var items: [Element] { get set }
+    
+    /// Actual number of elements in the collection
+    var count: Int { get }
+    
+    /// Pagination information
+    var _pagination: EvergreenCollectionPaginable { get set }
+
+    /// Datakeys for the Collection type
+    var _dataKeys: EvergreenCollectionDataParsable { get set }
     
     /**
-     Failable initializer to create an Evergreen object from
-     a JSONDictionary adding the base node to the representation
+     Failable initializer that gets a JSON representing a collection
      
-     - parameter baseNode: base node name
-     - parameter data: The JSONDictionary with the needed data
+     - parameter collectionJSON: JSON object representing a collection
      
-     - returns: nil if impossible to create the object
+     - returns: nil if impossible to create the collection
      */
-    init?(baseNode: String, data: JSONDictionary)
+    init(json: JSON) throws
+}
+
+// MARK: - Default implementation of EvergreenCollection
+
+extension EvergreenCollection {
     
-    /**
-     Static method to create a collection on EvergreenObject from an JSON response
-     
-     - parameter response:       NSHTTPURLResponse
-     - parameter representation: A representation of the response
-     
-     - returns: A collection of the same type
-     */
-    static func collection(response response: NSHTTPURLResponse, representation: AnyObject) -> [Self]
+    public var count: Int { return items.count }
+}
+
+// MARK: - Default implementation of CustomStringConvertible for EvergreenCollection
+
+extension EvergreenCollection {
+    
+    public var description: String { return "Actions:\ntotalCount: \(_pagination.totalCount)\ncount: \(count)\nnextPage: \(_pagination.nextPage)\nlastPage: \(_pagination.lastPage)\nprevPage: \(_pagination.prevPage)\nfirstPage: \(_pagination.firstPage)\nitems: \(items)\n\n" }
 }

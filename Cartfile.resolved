@@ -1,1 +1,2 @@
 github "Alamofire/Alamofire" "3.1.5"
+github "bignerdranch/Freddy" "2.0.1"
