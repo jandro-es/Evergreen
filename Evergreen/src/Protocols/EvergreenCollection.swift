@@ -33,7 +33,7 @@ import Freddy
 
 /// Protocol for the creation of a collection of EvergreenObjects
 
-public protocol EvergreenCollection: EvergreenObjectable {
+public protocol EvergreenCollection: EvergreenObjectable, CustomStringConvertible {
     
     /// Elements must conform to EvergreenObjectable
     typealias Element: EvergreenObjectable
@@ -44,14 +44,11 @@ public protocol EvergreenCollection: EvergreenObjectable {
     /// Actual number of elements in the collection
     var count: Int { get }
     
-    /// The total number of elements available
-    var totalCount: Int { get set }
-    
-    /// The next page to load if there is any
-    var nextPage: Int? { get set }
-    
-    /// The las page to load if there is any
-    var lastPage: Int? { get set }
+    /// Pagination information
+    var _pagination: EvergreenCollectionPaginable { get set }
+
+    /// Datakeys for the Collection type
+    var _dataKeys: EvergreenCollectionDataParsable { get set }
     
     /**
      Failable initializer that gets a JSON representing a collection
@@ -63,7 +60,16 @@ public protocol EvergreenCollection: EvergreenObjectable {
     init(json: JSON) throws
 }
 
+// MARK: - Default implementation of EvergreenCollection
+
 extension EvergreenCollection {
     
     public var count: Int { return items.count }
+}
+
+// MARK: - Default implementation of CustomStringConvertible for EvergreenCollection
+
+extension EvergreenCollection {
+    
+    public var description: String { return "Actions:\ntotalCount: \(_pagination.totalCount)\ncount: \(count)\nnextPage: \(_pagination.nextPage)\nlastPage: \(_pagination.lastPage)\nprevPage: \(_pagination.prevPage)\nfirstPage: \(_pagination.firstPage)\nitems: \(items)\n\n" }
 }

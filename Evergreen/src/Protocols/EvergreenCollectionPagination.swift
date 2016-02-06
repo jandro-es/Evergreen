@@ -1,8 +1,8 @@
 //
-//  NSDate+ISO8601.swift
+//  EvergreenCollectionPagination.swift
 //  Evergreen
 //
-//  Created by Alejandro Barros Cuetos on 01/02/2016.
+//  Created by Alejandro Barros Cuetos on 06/02/2016.
 //  Copyright © 2016 Alejandro Barros Cuetos. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without
@@ -29,41 +29,38 @@
 //
 
 import Foundation
+import Freddy
 
-public extension NSDate {
+/**
+ *  Protocol for Evergreen Collections pagination
+ */
+public protocol EvergreenCollectionPaginable {
     
-    /**
-     Creates an NSDate object from a ISO8601 string
-     
-     - parameter iso8601: The ISO8601 String
-     
-     - returns: The created object or nil if failure
-     */
-    convenience init?(iso8601: String) {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-        dateFormatter.timeZone = NSTimeZone.localTimeZone()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        
-        if let date = dateFormatter.dateFromString(iso8601) {
-            self.init(timeInterval:0, sinceDate:date)
-        } else {
-            self.init()
-        }
-    }
+    /// The total number of elements available
+    var totalCount: Int? { get set }
     
+    /// The next page to load if there is any
+    var nextPage: Int? { get set }
+    
+    /// The last page to load if there is any
+    var lastPage: Int? { get set }
+    
+    /// The first page if it´s not in the first one
+    var firstPage: Int? { get set }
+    
+    /// The previous page if there is any
+    var prevPage: Int? { get set }
+
     /**
-     Transforms a NSDate object into a ISO8601 formated string
+     Creates an instance of EvergreenCollectionPaginable using
+     the provided JSON and EvergreenCollectionDataKeys
      
-     - returns: The string representing the ISO8601 date
+     - parameter json:     The JSON object with pagination information
+     - parameter dataKeys: The EvergreenCollectionDataKeys to use
+     
+     - throws: JSON.Error
+     
+     - returns: An instance of EvergreenCollectionPaginable
      */
-    public func ISO8601() -> String {
-        
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-        dateFormatter.timeZone = NSTimeZone(abbreviation: "GMT")
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        
-        return dateFormatter.stringFromDate(self).stringByAppendingString("Z")
-    }
+    init(json: JSON, dataKeys: EvergreenCollectionDataParsable) throws
 }

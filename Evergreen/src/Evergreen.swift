@@ -88,12 +88,13 @@ public class Evergreen {
      API endpoint to get a collection of actions
      
      - parameter apiKey:       Digital Ocean API Token
+     - parameter page:         Page number
      - parameter queue:        dispatch_queue_t to execute the handlers
      - parameter onCompletion: On success handler
      - parameter onError:      On error handler
      */
-    public class func fetchActions(apiKey: String, queue: dispatch_queue_t = dispatch_get_main_queue(), onCompletion: (Actions?) -> Void, onError: (NSError?) -> Void) {
-        Alamofire.request(ActionRouter.ReadActions(apiKey)).responseEvergreen { (response: Response<Actions, NSError>) -> Void in
+    public class func fetchActions(apiKey: String, page: Int = 1, queue: dispatch_queue_t = dispatch_get_main_queue(), onCompletion: (Actions?) -> Void, onError: (NSError?) -> Void) {
+        Alamofire.request(ActionRouter.ReadActions(apiKey, page)).responseEvergreen { (response: Response<Actions, NSError>) -> Void in
             if response.result.isSuccess {
                 dispatch_async(queue) {
                     onCompletion(response.result.value)

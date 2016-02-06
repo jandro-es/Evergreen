@@ -1,8 +1,8 @@
 //
-//  NSDate+ISO8601.swift
+//  EvergreenPagination.swift
 //  Evergreen
 //
-//  Created by Alejandro Barros Cuetos on 01/02/2016.
+//  Created by Alejandro Barros Cuetos on 06/02/2016.
 //  Copyright © 2016 Alejandro Barros Cuetos. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without
@@ -29,41 +29,33 @@
 //
 
 import Foundation
+import Freddy
 
-public extension NSDate {
+public struct EvergreenPagination: EvergreenCollectionPaginable {
     
-    /**
-     Creates an NSDate object from a ISO8601 string
-     
-     - parameter iso8601: The ISO8601 String
-     
-     - returns: The created object or nil if failure
-     */
-    convenience init?(iso8601: String) {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-        dateFormatter.timeZone = NSTimeZone.localTimeZone()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        
-        if let date = dateFormatter.dateFromString(iso8601) {
-            self.init(timeInterval:0, sinceDate:date)
-        } else {
-            self.init()
+    public var totalCount: Int?
+    
+    public var nextPage: Int?
+    
+    public var lastPage: Int?
+    
+    public var firstPage: Int?
+    
+    public var prevPage: Int?
+    
+    public init(json: JSON, dataKeys: EvergreenCollectionDataParsable) throws {
+        totalCount = try json.int(dataKeys.kMetaNode, dataKeys.kMetaTotalLeaf)
+        if let nextPageString = try? NSURL(string: json.string(dataKeys.kLinksNode, dataKeys.kLinksPagesNode, dataKeys.kLinksPageNextLeaf))?.getQueryValues("page")?.first {
+            nextPage = Int(nextPageString!)
         }
-    }
-    
-    /**
-     Transforms a NSDate object into a ISO8601 formated string
-     
-     - returns: The string representing the ISO8601 date
-     */
-    public func ISO8601() -> String {
-        
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-        dateFormatter.timeZone = NSTimeZone(abbreviation: "GMT")
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        
-        return dateFormatter.stringFromDate(self).stringByAppendingString("Z")
+        if let prevPageString = try? NSURL(string: json.string(dataKeys.kLinksNode, dataKeys.kLinksPagesNode, dataKeys.kLinksPagePrevLeaf))?.getQueryValues("page")?.first {
+            prevPage = Int(prevPageString!)
+        }
+        if let lastPageString = try? NSURL(string: json.string(dataKeys.kLinksNode, dataKeys.kLinksPagesNode, dataKeys.kLinksPageLastLeaf))?.getQueryValues("page")?.first {
+            lastPage = Int(lastPageString!)
+        }
+        if let firstPageString = try? NSURL(string: json.string(dataKeys.kLinksNode, dataKeys.kLinksPagesNode, dataKeys.kLinksPageFirstLeaf))?.getQueryValues("page")?.first {
+            firstPage = Int(firstPageString!)
+        }
     }
 }

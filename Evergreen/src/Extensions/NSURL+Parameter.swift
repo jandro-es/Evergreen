@@ -1,8 +1,8 @@
 //
-//  NSDate+ISO8601.swift
+//  String+Page.swift
 //  Evergreen
 //
-//  Created by Alejandro Barros Cuetos on 01/02/2016.
+//  Created by Alejandro Barros Cuetos on 04/02/2016.
 //  Copyright © 2016 Alejandro Barros Cuetos. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without
@@ -30,40 +30,20 @@
 
 import Foundation
 
-public extension NSDate {
+extension NSURL {
     
     /**
-     Creates an NSDate object from a ISO8601 string
+     Gets an array of values for the requires parameter name
+    
+     - parameter key: The name of the parameter
      
-     - parameter iso8601: The ISO8601 String
-     
-     - returns: The created object or nil if failure
+     - returns: An array of values
      */
-    convenience init?(iso8601: String) {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-        dateFormatter.timeZone = NSTimeZone.localTimeZone()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        
-        if let date = dateFormatter.dateFromString(iso8601) {
-            self.init(timeInterval:0, sinceDate:date)
-        } else {
-            self.init()
+    func getQueryValues(key: String) -> [String]? {
+        guard let components = NSURLComponents(URL: self, resolvingAgainstBaseURL: false), items = components.queryItems else {
+            return nil
         }
-    }
-    
-    /**
-     Transforms a NSDate object into a ISO8601 formated string
-     
-     - returns: The string representing the ISO8601 date
-     */
-    public func ISO8601() -> String {
         
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-        dateFormatter.timeZone = NSTimeZone(abbreviation: "GMT")
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        
-        return dateFormatter.stringFromDate(self).stringByAppendingString("Z")
+        return items.filter { $0.name == key }.map({ $0.value! })
     }
 }

@@ -33,7 +33,7 @@ import XCTest
 
 class EvergreenTests: XCTestCase {
     
-    private let kApiTestToken = "Enter your Digital Ocean API token to test"
+    private let kApiTestToken = ""
     
     var asyncExpectation: XCTestExpectation?
     
@@ -61,7 +61,15 @@ class EvergreenTests: XCTestCase {
         Evergreen.fetchActions(kApiTestToken, onCompletion: { (actions) -> Void in
             if let actions = actions {
                 print(actions)
-                self.asyncExpectation?.fulfill()
+                print("Page number 2 \n")
+                Evergreen.fetchActions(self.kApiTestToken, page: 2, onCompletion: { (action) -> Void in
+                    print(action)
+                    self.asyncExpectation?.fulfill()
+                    }, onError: { (error) -> Void in
+                        if let error = error {
+                            assertionFailure("Error while fetching second page of actions: \(error)")
+                        }
+                })
             }
             }) { (error) -> Void in
                 if let error = error {

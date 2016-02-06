@@ -87,8 +87,8 @@ extension Action: JSONDecodable {
         resourceId = try actionJSON.int(_dataKeys.ResourceId.rawValue)
         resourceType   = try actionJSON.string(_dataKeys.ResourceType.rawValue)
         regionSlug = try actionJSON.string(_dataKeys.RegionSlug.rawValue)
-        startedAt = try NSDate.dateFromISO8601(actionJSON.string(_dataKeys.StartedAt.rawValue))
-        completedAt = try NSDate.dateFromISO8601(actionJSON.string(_dataKeys.CompletedAt.rawValue))
+        startedAt = try NSDate(iso8601: actionJSON.string(_dataKeys.StartedAt.rawValue))
+        completedAt = try NSDate(iso8601: actionJSON.string(_dataKeys.CompletedAt.rawValue))
     }
 }
 
@@ -101,43 +101,18 @@ extension Action: CustomStringConvertible {
 
 public struct Actions: EvergreenCollection, JSONDecodable {
     
-    // MARK: - Private properties
-    
-    private enum _dataKeys: String {
-        
-        case MetaNode = "meta"
-        case LinksNode = "links"
-        case CollectionNode = "actions"
-        case MetaTotalLeaf = "total"
-        case LinksPagesNode = "pages"
-        case LinksPageLastLeaf = "last"
-        case LinksPageNextLeaf = "next"
-
-    }
-    
     // MARK: - Public properties
     
     public var items: [Action]
 
-    public var totalCount: Int
+    public var _pagination: EvergreenCollectionPaginable
     
-    public var nextPage: Int?
-    
-    public var lastPage: Int?
+    public var _dataKeys: EvergreenCollectionDataParsable = EvergreenCollectionDataKeys(collectionNode: "actions")
     
     public init(json: JSON) throws {
-        items = try json.array(_dataKeys.CollectionNode.rawValue).map(Action.init)
-        totalCount = try json.int(_dataKeys.MetaNode.rawValue, _dataKeys.MetaTotalLeaf.rawValue)
-       // nextPage = try json.int(_dataKeys.LinksNode.rawValue, _dataKeys.LinksPagesNode.rawValue, _dataKeys.LinksPageNextLeaf.rawValue)
-       // lastPage = try json.int(_dataKeys.LinksNode.rawValue, _dataKeys.LinksPagesNode.rawValue, _dataKeys.LinksPageLastLeaf.rawValue)
+        items = try json.array(_dataKeys.kCollectionNode!).map(Action.init)
+        _pagination = try EvergreenPagination(json: json, dataKeys: _dataKeys)
     }
-}
-
-// MARK: - CustomStringConvertible
-
-extension Actions: CustomStringConvertible {
-    
-    public var description: String { return "Actions:\ntotalCount: \(totalCount)\ncount: \(count)\nnextPage: \(nextPage)\nlastPage: \(lastPage)\nitems: \(items)\n\n" }
 }
 
 public func ==(lhs: Action, rhs: Action) -> Bool { return lhs.actionId == rhs.actionId && lhs.actionType == rhs.actionType }
