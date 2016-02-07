@@ -33,7 +33,7 @@ import XCTest
 
 class EvergreenTests: XCTestCase {
     
-    private let kApiTestToken = ""
+    private let kApiTestToken = "c0ae1ef7205c8d89ecc4a6d5a1227420932320718387f34ba35b6283e4e560e6"
     
     var asyncExpectation: XCTestExpectation?
     
@@ -74,6 +74,25 @@ class EvergreenTests: XCTestCase {
             }) { (error) -> Void in
                 if let error = error {
                     assertionFailure("Error while fetching actions: \(error)")
+                }
+        }
+        waitForExpectationsWithTimeout(5.0) { (error) -> Void in
+            if error != nil {
+                print("Error while waiting: \(error?.localizedDescription)")
+            }
+        }
+    }
+    
+    func testReadDomains() {
+        asyncExpectation = expectationWithDescription("Read Domains expectation")
+        Evergreen.fetchDomains(kApiTestToken, onCompletion: { (domains) -> Void in
+            if let domains = domains {
+                print(domains)
+                self.asyncExpectation?.fulfill()
+            }
+            }) { (error) -> Void in
+                if let error = error {
+                    assertionFailure("Error while fetching domains: \(error)")
                 }
         }
         waitForExpectationsWithTimeout(5.0) { (error) -> Void in

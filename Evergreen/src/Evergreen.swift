@@ -106,4 +106,50 @@ public class Evergreen {
             }
         }
     }
+    
+    /**
+     API endpoint to get the details of a domain
+     
+     - parameter apiKey:       Digital Ocean API Token
+     - parameter domainName:   The name of the domain
+     - parameter queue:        dispatch_queue_t to execute the handlers
+     - parameter onCompletion: On success handler
+     - parameter onError:      On error handler
+     */
+    public class func fetchDomain(apiKey: String, domainName: String, queue: dispatch_queue_t = dispatch_get_main_queue(), onCompletion: (Domain?) -> Void, onError: (NSError?) -> Void) {
+        Alamofire.request(DomainRouter.ReadDomain(apiKey, domainName)).responseEvergreen { (response: Response<Domain, NSError>) -> Void in
+            if response.result.isSuccess {
+                dispatch_async(queue) {
+                    onCompletion(response.result.value)
+                }
+            } else {
+                dispatch_async(queue) {
+                    onError(response.result.error)
+                }
+            }
+        }
+    }
+    
+    /**
+     API endpoint to get a collection of actions
+     
+     - parameter apiKey:       Digital Ocean API Token
+     - parameter page:         Page number
+     - parameter queue:        dispatch_queue_t to execute the handlers
+     - parameter onCompletion: On success handler
+     - parameter onError:      On error handler
+     */
+    public class func fetchDomains(apiKey: String, page: Int = 1, queue: dispatch_queue_t = dispatch_get_main_queue(), onCompletion: (Domains?) -> Void, onError: (NSError?) -> Void) {
+        Alamofire.request(DomainRouter.ReadDomains(apiKey, page)).responseEvergreen { (response: Response<Domains, NSError>) -> Void in
+            if response.result.isSuccess {
+                dispatch_async(queue) {
+                    onCompletion(response.result.value)
+                }
+            } else {
+                dispatch_async(queue) {
+                    onError(response.result.error)
+                }
+            }
+        }
+    }
 }

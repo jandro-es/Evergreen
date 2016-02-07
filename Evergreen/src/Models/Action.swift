@@ -33,8 +33,6 @@ import Freddy
 
 public struct Action: EvergreenObjectable {
     
-    // TODO: Meta and links
-    
     // MARK: - Private Properties
     
     private static let _kBaseNode = "action"
@@ -99,6 +97,9 @@ extension Action: CustomStringConvertible {
     public var description: String { return "Action:\nid: \(actionId)\ntype: \(actionType)\nstatus: \(status.rawValue)\ncompletedAt: \(completedAt)\nstartedAt: \(startedAt)\ncompleteAt: \(completedAt)\nresourceId: \(resourceId)\nresourceType: \(resourceType)\nregionSlug: \(regionSlug)\n\n" }
 }
 
+/**
+ *  Holds a collection of Actions
+ */
 public struct Actions: EvergreenCollection, JSONDecodable {
     
     // MARK: - Public properties
@@ -115,4 +116,4 @@ public struct Actions: EvergreenCollection, JSONDecodable {
     }
 }
 
-public func ==(lhs: Action, rhs: Action) -> Bool { return lhs.actionId == rhs.actionId && lhs.actionType == rhs.actionType }
+public func == (lhs: Action, rhs: Action) -> Bool { return lhs.actionId == rhs.actionId && lhs.actionType == rhs.actionType }

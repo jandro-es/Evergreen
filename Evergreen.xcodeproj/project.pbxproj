@@ -32,6 +32,10 @@
 		B1831AF71C5E642600DC2D23 /* Request+Evergreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1831AF51C5E642600DC2D23 /* Request+Evergreen.swift */; };
 		B1831AFD1C5E68C000DC2D23 /* AccountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1831AFC1C5E68C000DC2D23 /* AccountRouter.swift */; };
 		B1831AFE1C5E68C000DC2D23 /* AccountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1831AFC1C5E68C000DC2D23 /* AccountRouter.swift */; };
+		B1A193041C679A4500647C33 /* Domain.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A193031C679A4500647C33 /* Domain.swift */; };
+		B1A193051C679A4500647C33 /* Domain.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A193031C679A4500647C33 /* Domain.swift */; };
+		B1A193071C679D5700647C33 /* DomainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A193061C679D5700647C33 /* DomainRouter.swift */; };
+		B1A193081C679D5700647C33 /* DomainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A193061C679D5700647C33 /* DomainRouter.swift */; };
 		B1C5E6F11C6166DA003DBAA6 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C5E6F01C6166DA003DBAA6 /* Freddy.framework */; };
 		B1C5E6F31C6166F1003DBAA6 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C5E6F21C6166F1003DBAA6 /* Freddy.framework */; };
 		B1C5E6F51C640D45003DBAA6 /* EvergreenExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C5E6F41C640D45003DBAA6 /* EvergreenExtensionsTests.swift */; };
@@ -79,6 +83,8 @@
 		B1831AF11C5E63B700DC2D23 /* EvergreenCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EvergreenCollection.swift; path = src/Protocols/EvergreenCollection.swift; sourceTree = "<group>"; };
 		B1831AF51C5E642600DC2D23 /* Request+Evergreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Request+Evergreen.swift"; path = "src/Extensions/Request+Evergreen.swift"; sourceTree = "<group>"; };
 		B1831AFC1C5E68C000DC2D23 /* AccountRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountRouter.swift; path = src/Routers/AccountRouter.swift; sourceTree = "<group>"; };
+		B1A193031C679A4500647C33 /* Domain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Domain.swift; path = src/Models/Domain.swift; sourceTree = "<group>"; };
+		B1A193061C679D5700647C33 /* DomainRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DomainRouter.swift; path = src/Routers/DomainRouter.swift; sourceTree = "<group>"; };
 		B1C5E6F01C6166DA003DBAA6 /* Freddy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Freddy.framework; path = Carthage/Build/iOS/Freddy.framework; sourceTree = "<group>"; };
 		B1C5E6F21C6166F1003DBAA6 /* Freddy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Freddy.framework; path = Carthage/Build/Mac/Freddy.framework; sourceTree = "<group>"; };
 		B1C5E6F41C640D45003DBAA6 /* EvergreenExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EvergreenExtensionsTests.swift; sourceTree = "<group>"; };
@@ -187,6 +193,7 @@
 			children = (
 				B1831AE11C5E5D7A00DC2D23 /* Account.swift */,
 				B1382DC41C6015AE00734374 /* Action.swift */,
+				B1A193031C679A4500647C33 /* Domain.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -244,6 +251,7 @@
 			children = (
 				B1831AFC1C5E68C000DC2D23 /* AccountRouter.swift */,
 				B1382DCA1C60217D00734374 /* ActionRouter.swift */,
+				B1A193061C679D5700647C33 /* DomainRouter.swift */,
 			);
 			name = Routers;
 			sourceTree = "<group>";
@@ -445,11 +453,13 @@
 				B1D472C61C66736500CD1353 /* EvergreenPagination.swift in Sources */,
 				B1831AEC1C5E630500DC2D23 /* Evergreen.swift in Sources */,
 				B1D472CF1C66748D00CD1353 /* EvergreenCollectionDataKeys.swift in Sources */,
+				B1A193071C679D5700647C33 /* DomainRouter.swift in Sources */,
 				B1382DC81C60198500734374 /* NSDate+ISO8601.swift in Sources */,
 				B1C5E6F81C6414D1003DBAA6 /* NSURL+Parameter.swift in Sources */,
 				B1D472CC1C6673F500CD1353 /* EvergreenCollectionDataParsable.swift in Sources */,
 				B1831AEF1C5E637A00DC2D23 /* EvergreenObjectable.swift in Sources */,
 				B1382DC51C6015AE00734374 /* Action.swift in Sources */,
+				B1A193041C679A4500647C33 /* Domain.swift in Sources */,
 				B1831AF21C5E63B700DC2D23 /* EvergreenCollection.swift in Sources */,
 				B1831AF61C5E642600DC2D23 /* Request+Evergreen.swift in Sources */,
 				B1D472C91C66739800CD1353 /* EvergreenCollectionPagination.swift in Sources */,
@@ -477,11 +487,13 @@
 				B1D472C71C66736500CD1353 /* EvergreenPagination.swift in Sources */,
 				B1831AED1C5E630500DC2D23 /* Evergreen.swift in Sources */,
 				B1D472D01C66748D00CD1353 /* EvergreenCollectionDataKeys.swift in Sources */,
+				B1A193081C679D5700647C33 /* DomainRouter.swift in Sources */,
 				B1382DC91C60198500734374 /* NSDate+ISO8601.swift in Sources */,
 				B1C5E6F91C6414D1003DBAA6 /* NSURL+Parameter.swift in Sources */,
 				B1D472CD1C6673F500CD1353 /* EvergreenCollectionDataParsable.swift in Sources */,
 				B1831AF01C5E637A00DC2D23 /* EvergreenObjectable.swift in Sources */,
 				B1382DC61C6015AE00734374 /* Action.swift in Sources */,
+				B1A193051C679A4500647C33 /* Domain.swift in Sources */,
 				B1831AF31C5E63B700DC2D23 /* EvergreenCollection.swift in Sources */,
 				B1831AF71C5E642600DC2D23 /* Request+Evergreen.swift in Sources */,
 				B1D472CA1C66739800CD1353 /* EvergreenCollectionPagination.swift in Sources */,
