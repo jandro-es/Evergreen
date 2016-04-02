@@ -33,7 +33,7 @@ import XCTest
 
 class EvergreenTests: XCTestCase {
     
-    private let kApiTestToken = "c0ae1ef7205c8d89ecc4a6d5a1227420932320718387f34ba35b6283e4e560e6"
+    private let kApiTestToken = ""
     
     var asyncExpectation: XCTestExpectation?
     
@@ -93,6 +93,50 @@ class EvergreenTests: XCTestCase {
             }) { (error) -> Void in
                 if let error = error {
                     assertionFailure("Error while fetching domains: \(error)")
+                }
+        }
+        waitForExpectationsWithTimeout(5.0) { (error) -> Void in
+            if error != nil {
+                print("Error while waiting: \(error?.localizedDescription)")
+            }
+        }
+    }
+    
+    /**
+     Tests the creation of a domain, for it to work it needs a name and an IP Address for the domain
+     */
+    func testCreateDomain() {
+        asyncExpectation = expectationWithDescription("Create Domain expectation")
+        Evergreen.createDomain(kApiTestToken, values: ["name": "", "ip_address": ""], onCompletion: { (domain) -> Void in
+            if let domain = domain {
+                print(domain)
+                self.asyncExpectation?.fulfill()
+            }
+            }) { (error) -> Void in
+                if let error = error {
+                    print(error)
+                    assertionFailure("Error while creating domain: \(error)")
+                }
+        }
+        waitForExpectationsWithTimeout(5.0) { (error) -> Void in
+            if error != nil {
+                print("Error while waiting: \(error?.localizedDescription)")
+            }
+        }
+    }
+    
+    /**
+     Test the deletion of a Domain, for it to work it needs the name of an existing domain
+     */
+    func testDeleteDomain() {
+        asyncExpectation = expectationWithDescription("Delete Domain expectation")
+        Evergreen.deleteDomain(kApiTestToken, domainName: "", onDeletionSuccess: {
+            print("Deletion of the domain succesful")
+            self.asyncExpectation?.fulfill()
+            }) { (error) in
+                if let error = error {
+                    print(error)
+                    assertionFailure("Error while deleting a domain: \(error)")
                 }
         }
         waitForExpectationsWithTimeout(5.0) { (error) -> Void in

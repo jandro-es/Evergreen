@@ -39,6 +39,10 @@ public class Evergreen {
     
     public static let kBaseURLString = "https://api.digitalocean.com/v2"
     
+    public typealias OnSuccess = (T: EvergreenObjectable?) -> Void
+    public typealias OnDeletionSuccess = () -> Void
+    public typealias OnError = (NSError?) -> Void
+    
     /**
      API endpoint to get the information of the account for the given API Token
      
@@ -47,11 +51,11 @@ public class Evergreen {
      - parameter onCompletion: On success handler
      - parameter onError:      On error handler
      */
-    public class func fetchAccount(apiKey: String, queue: dispatch_queue_t = dispatch_get_main_queue(), onCompletion: (Account?) -> Void, onError: (NSError?) -> Void) {
+    public class func fetchAccount(apiKey: String, queue: dispatch_queue_t = dispatch_get_main_queue(), onCompletion: OnSuccess, onError: OnError) {
         Alamofire.request(AccountRouter.ReadAccount(apiKey)).responseEvergreen { (response: Response<Account, NSError>) -> Void in
             if response.result.isSuccess {
                 dispatch_async(queue) {
-                    onCompletion(response.result.value)
+                    onCompletion(T: response.result.value)
                 }
             } else {
                 dispatch_async(queue) {
@@ -70,11 +74,11 @@ public class Evergreen {
      - parameter onCompletion: On success handler
      - parameter onError:      On error handler
      */
-    public class func fetchAction(apiKey: String, actionId: Int, queue: dispatch_queue_t = dispatch_get_main_queue(), onCompletion: (Action?) -> Void, onError: (NSError?) -> Void) {
+    public class func fetchAction(apiKey: String, actionId: Int, queue: dispatch_queue_t = dispatch_get_main_queue(), onCompletion: OnSuccess, onError: OnError) {
         Alamofire.request(ActionRouter.ReadAction(apiKey, actionId)).responseEvergreen { (response: Response<Action, NSError>) -> Void in
             if response.result.isSuccess {
                 dispatch_async(queue) {
-                    onCompletion(response.result.value)
+                    onCompletion(T: response.result.value)
                 }
             } else {
                 dispatch_async(queue) {
@@ -93,11 +97,11 @@ public class Evergreen {
      - parameter onCompletion: On success handler
      - parameter onError:      On error handler
      */
-    public class func fetchActions(apiKey: String, page: Int = 1, queue: dispatch_queue_t = dispatch_get_main_queue(), onCompletion: (Actions?) -> Void, onError: (NSError?) -> Void) {
+    public class func fetchActions(apiKey: String, page: Int = 1, queue: dispatch_queue_t = dispatch_get_main_queue(), onCompletion: OnSuccess, onError: OnError) {
         Alamofire.request(ActionRouter.ReadActions(apiKey, page)).responseEvergreen { (response: Response<Actions, NSError>) -> Void in
             if response.result.isSuccess {
                 dispatch_async(queue) {
-                    onCompletion(response.result.value)
+                    onCompletion(T: response.result.value)
                 }
             } else {
                 dispatch_async(queue) {
@@ -116,11 +120,11 @@ public class Evergreen {
      - parameter onCompletion: On success handler
      - parameter onError:      On error handler
      */
-    public class func fetchDomain(apiKey: String, domainName: String, queue: dispatch_queue_t = dispatch_get_main_queue(), onCompletion: (Domain?) -> Void, onError: (NSError?) -> Void) {
+    public class func fetchDomain(apiKey: String, domainName: String, queue: dispatch_queue_t = dispatch_get_main_queue(), onCompletion: OnSuccess, onError: OnError) {
         Alamofire.request(DomainRouter.ReadDomain(apiKey, domainName)).responseEvergreen { (response: Response<Domain, NSError>) -> Void in
             if response.result.isSuccess {
                 dispatch_async(queue) {
-                    onCompletion(response.result.value)
+                    onCompletion(T: response.result.value)
                 }
             } else {
                 dispatch_async(queue) {
@@ -139,15 +143,67 @@ public class Evergreen {
      - parameter onCompletion: On success handler
      - parameter onError:      On error handler
      */
-    public class func fetchDomains(apiKey: String, page: Int = 1, queue: dispatch_queue_t = dispatch_get_main_queue(), onCompletion: (Domains?) -> Void, onError: (NSError?) -> Void) {
+    public class func fetchDomains(apiKey: String, page: Int = 1, queue: dispatch_queue_t = dispatch_get_main_queue(), onCompletion: OnSuccess, onError: OnError) {
         Alamofire.request(DomainRouter.ReadDomains(apiKey, page)).responseEvergreen { (response: Response<Domains, NSError>) -> Void in
             if response.result.isSuccess {
                 dispatch_async(queue) {
-                    onCompletion(response.result.value)
+                    onCompletion(T: response.result.value)
                 }
             } else {
                 dispatch_async(queue) {
                     onError(response.result.error)
+                }
+            }
+        }
+    }
+    
+    /**
+     API endpoint to create a Domain
+     
+     - parameter apiKey:       Digital Ocean API Token
+     - parameter values:       Dictionary with the required values ["name": String, "ip_address": String]
+     - parameter queue:        dispatch_queue_t to execute the handlers
+     - parameter onCompletion: On success handler
+     - parameter onError:      On error handler
+     */
+    public class func createDomain(apiKey: String, values: [String:AnyObject], queue: dispatch_queue_t = dispatch_get_main_queue(), onCompletion: OnSuccess, onError: OnError) {
+        Alamofire.request(DomainRouter.CreateDomain(apiKey, values)).responseEvergreen { (response: Response<Domain, NSError>) -> Void in
+            if response.result.isSuccess {
+                dispatch_async(queue) {
+                    onCompletion(T: response.result.value)
+                }
+            } else {
+                dispatch_async(queue) {
+                    onError(response.result.error)
+                }
+            }
+        }
+    }
+    
+    /**
+     API endpoint to delete a Domain
+     
+     - parameter apiKey:            Digital Ocean API Token
+     - parameter domainName:        The name of the Domain
+     - parameter queue:             dispatch_queue_t to execute the handlers
+     - parameter onDeletionSuccess: On success handler
+     - parameter onError:           On error handler
+     */
+    public class func deleteDomain(apiKey: String, domainName: String, queue: dispatch_queue_t = dispatch_get_main_queue(), onDeletionSuccess: OnDeletionSuccess, onError: OnError) {
+        Alamofire.request(DomainRouter.DeleteDomain(apiKey, domainName)).response { request, response, data, error in
+            if let error = error {
+                dispatch_async(queue) {
+                    onError(error)
+                }
+            } else {
+                if response!.statusCode == 204 {
+                    dispatch_async(queue) {
+                        onDeletionSuccess()
+                    }
+                } else {
+                    dispatch_async(queue) {
+                        onError(NSError(domain: kEvergreenErrorDomain, code: response!.statusCode, userInfo: [NSLocalizedDescriptionKey: "Error while deleting a domain"]))
+                    }
                 }
             }
         }

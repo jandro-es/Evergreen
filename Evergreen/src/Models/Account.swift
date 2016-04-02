@@ -82,15 +82,6 @@ extension Account: JSONDecodable {
     }
 }
 
-// MARK: - JSONEncodable
-
-extension Account: JSONEncodable {
-    
-    public func toJSON() -> JSON {
-        return .Dictionary([_dataKeys.UUID.rawValue: .String(uuid), _dataKeys.Email.rawValue: .String(email), _dataKeys.DropletLimit.rawValue: .Int(dropletLimit), _dataKeys.EmailVerified.rawValue: .Bool(emailVerified), _dataKeys.FloatingIPLimit.rawValue: .Int(floatingIPLimit), _dataKeys.Status.rawValue: .String(accountStatus.rawValue), _dataKeys.StatusMessage.rawValue: .String(accountStatusMessage)])
-    }
-}
-
 // MARK: - CustomStringConvertible
 
 extension Account: CustomStringConvertible {

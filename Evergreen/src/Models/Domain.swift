@@ -45,8 +45,8 @@ public struct Domain: EvergreenObjectable {
     }
     
     public let domainName: String
-    public let ttl: Int
-    public let zoneFile: String
+    public var ttl: Int?
+    public var zoneFile: String?
 }
 
 // MARK: - JSONDecodable
@@ -61,8 +61,21 @@ extension Domain: JSONDecodable {
             domainJSON = json
         }
         domainName = try domainJSON.string(_dataKeys.DomainName.rawValue)
-        ttl = try domainJSON.int(_dataKeys.TTL.rawValue)
-        zoneFile = try domainJSON.string(_dataKeys.ZoneFile.rawValue)
+        do {
+            ttl = try domainJSON.int(_dataKeys.TTL.rawValue)
+            zoneFile = try domainJSON.string(_dataKeys.ZoneFile.rawValue)
+        } catch {
+            debugPrint("Not able to parse TTL or ZoneFile")
+        }
+    }
+}
+
+// MARK: - JSONEncodable
+
+extension Domain: JSONEncodable {
+    
+    public func toJSON() -> JSON {
+        return .Dictionary([_dataKeys.DomainName.rawValue: .String(domainName), _dataKeys.TTL.rawValue: .Int(ttl ?? 0), _dataKeys.ZoneFile.rawValue: .String(zoneFile ?? "")])
     }
 }
 

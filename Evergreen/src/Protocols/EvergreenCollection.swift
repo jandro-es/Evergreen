@@ -36,7 +36,7 @@ import Freddy
 public protocol EvergreenCollection: EvergreenObjectable, CustomStringConvertible {
     
     /// Elements must conform to EvergreenObjectable
-    typealias Element: EvergreenObjectable
+    associatedtype Element: EvergreenObjectable
     
     /// The collection of Elements
     var items: [Element] { get set }

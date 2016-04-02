@@ -52,10 +52,37 @@ enum DomainRouter: URLRequestConvertible {
      */
     case ReadDomains(String, Int)
     
+    /**
+     *  Creates a new domain
+     *
+     *  @param String API Key
+     *
+     *  @param [String : AnyObject]
+     *
+     *  @return API Endpoint
+     */
+    case CreateDomain(String, [String : AnyObject])
+    
+    /**
+     *  Deletes a Domain
+     *
+     *  @param String API Key
+     *  @param String Domain name
+     *
+     *  @return API Endpoint
+     */
+    case DeleteDomain(String, String)
+    
     var method: Alamofire.Method {
         switch self {
         case .ReadDomain, .ReadDomains:
             return .GET
+            
+        case .CreateDomain:
+            return .POST
+            
+        case .DeleteDomain:
+            return .DELETE
         }
     }
     
@@ -64,8 +91,11 @@ enum DomainRouter: URLRequestConvertible {
         case .ReadDomain(_, let domainName):
             return "/domains/\(domainName)"
             
-        case .ReadDomains(_, _):
+        case .ReadDomains(_, _), .CreateDomain(_, _):
             return "/domains"
+            
+        case .DeleteDomain(_, let domainName):
+            return "/domains/\(domainName)"
         }
     }
     
@@ -87,6 +117,14 @@ enum DomainRouter: URLRequestConvertible {
         case .ReadDomains(let apiKey, let pageNumber):
             mutableURLRequest.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
             return Alamofire.ParameterEncoding.URLEncodedInURL.encode(mutableURLRequest, parameters: ["page": pageNumber]).0
+        
+        case .CreateDomain(let apiKey, let parameters):
+            mutableURLRequest.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
+            
+        case .DeleteDomain(let apiKey, _):
+            mutableURLRequest.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: nil).0
         }
     }
 }
