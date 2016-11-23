@@ -14,6 +14,9 @@
 		B1382DC91C60198500734374 /* NSDate+ISO8601.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1382DC71C60198500734374 /* NSDate+ISO8601.swift */; };
 		B1382DCB1C60217D00734374 /* ActionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1382DCA1C60217D00734374 /* ActionRouter.swift */; };
 		B1382DCC1C60217D00734374 /* ActionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1382DCA1C60217D00734374 /* ActionRouter.swift */; };
+		B157CDA81CB0502E007BEDEE /* DomainRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B157CDA71CB0502E007BEDEE /* DomainRecord.swift */; };
+		B157CDA91CB0502E007BEDEE /* DomainRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B157CDA71CB0502E007BEDEE /* DomainRecord.swift */; };
+		B157CDAB1CB05458007BEDEE /* DomainRecordRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B157CDAA1CB05458007BEDEE /* DomainRecordRouter.swift */; };
 		B1831AAD1C5E5A4E00DC2D23 /* Evergreen.h in Headers */ = {isa = PBXBuildFile; fileRef = B1831AAC1C5E5A4E00DC2D23 /* Evergreen.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B1831AB41C5E5A4E00DC2D23 /* Evergreen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1831AA91C5E5A4E00DC2D23 /* Evergreen.framework */; };
 		B1831AB91C5E5A4E00DC2D23 /* EvergreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1831AB81C5E5A4E00DC2D23 /* EvergreenTests.swift */; };
@@ -66,6 +69,8 @@
 		B1382DC41C6015AE00734374 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Action.swift; path = src/Models/Action.swift; sourceTree = "<group>"; };
 		B1382DC71C60198500734374 /* NSDate+ISO8601.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSDate+ISO8601.swift"; path = "src/Extensions/NSDate+ISO8601.swift"; sourceTree = "<group>"; };
 		B1382DCA1C60217D00734374 /* ActionRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActionRouter.swift; path = src/Routers/ActionRouter.swift; sourceTree = "<group>"; };
+		B157CDA71CB0502E007BEDEE /* DomainRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DomainRecord.swift; path = src/Models/DomainRecord.swift; sourceTree = "<group>"; };
+		B157CDAA1CB05458007BEDEE /* DomainRecordRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DomainRecordRouter.swift; path = src/Routers/DomainRecordRouter.swift; sourceTree = "<group>"; };
 		B1831AA91C5E5A4E00DC2D23 /* Evergreen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Evergreen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1831AAC1C5E5A4E00DC2D23 /* Evergreen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Evergreen.h; sourceTree = "<group>"; };
 		B1831AAE1C5E5A4E00DC2D23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -194,6 +199,7 @@
 				B1831AE11C5E5D7A00DC2D23 /* Account.swift */,
 				B1382DC41C6015AE00734374 /* Action.swift */,
 				B1A193031C679A4500647C33 /* Domain.swift */,
+				B157CDA71CB0502E007BEDEE /* DomainRecord.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -252,6 +258,7 @@
 				B1831AFC1C5E68C000DC2D23 /* AccountRouter.swift */,
 				B1382DCA1C60217D00734374 /* ActionRouter.swift */,
 				B1A193061C679D5700647C33 /* DomainRouter.swift */,
+				B157CDAA1CB05458007BEDEE /* DomainRecordRouter.swift */,
 			);
 			name = Routers;
 			sourceTree = "<group>";
@@ -456,8 +463,10 @@
 				B1A193071C679D5700647C33 /* DomainRouter.swift in Sources */,
 				B1382DC81C60198500734374 /* NSDate+ISO8601.swift in Sources */,
 				B1C5E6F81C6414D1003DBAA6 /* NSURL+Parameter.swift in Sources */,
+				B157CDAB1CB05458007BEDEE /* DomainRecordRouter.swift in Sources */,
 				B1D472CC1C6673F500CD1353 /* EvergreenCollectionDataParsable.swift in Sources */,
 				B1831AEF1C5E637A00DC2D23 /* EvergreenObjectable.swift in Sources */,
+				B157CDA81CB0502E007BEDEE /* DomainRecord.swift in Sources */,
 				B1382DC51C6015AE00734374 /* Action.swift in Sources */,
 				B1A193041C679A4500647C33 /* Domain.swift in Sources */,
 				B1831AF21C5E63B700DC2D23 /* EvergreenCollection.swift in Sources */,
@@ -492,6 +501,7 @@
 				B1C5E6F91C6414D1003DBAA6 /* NSURL+Parameter.swift in Sources */,
 				B1D472CD1C6673F500CD1353 /* EvergreenCollectionDataParsable.swift in Sources */,
 				B1831AF01C5E637A00DC2D23 /* EvergreenObjectable.swift in Sources */,
+				B157CDA91CB0502E007BEDEE /* DomainRecord.swift in Sources */,
 				B1382DC61C6015AE00734374 /* Action.swift in Sources */,
 				B1A193051C679A4500647C33 /* Domain.swift in Sources */,
 				B1831AF31C5E63B700DC2D23 /* EvergreenCollection.swift in Sources */,
